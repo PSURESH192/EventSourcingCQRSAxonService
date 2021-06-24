@@ -27,11 +27,11 @@ public class AccountQueryEntityManager {
         persistAccount(buildQueryAccount(getAccountFromEvent(event)));
     }
 
-    private PaymentAggregate getAccountFromEvent(Event event) {
+    public PaymentAggregate getAccountFromEvent(Event event) {
         return paymentAggregateEventSourcingRepository.load(event.transactionId.toString()).getWrappedAggregate().getAggregateRoot();
     }
 
-    private AccountQueryEntity buildQueryAccount(PaymentAggregate paymentAggregate) {
+    public AccountQueryEntity buildQueryAccount(PaymentAggregate paymentAggregate) {
         Optional<AccountQueryEntity> accountQueryEntityOptional = accountRepository.findById(paymentAggregate.getTransactionId());
         AccountQueryEntity accountQueryEntity = accountQueryEntityOptional.isPresent() ? accountQueryEntityOptional.get() : new AccountQueryEntity();
         accountQueryEntity.setTransactionId(paymentAggregate.getTransactionId());
@@ -41,7 +41,7 @@ public class AccountQueryEntityManager {
         return accountQueryEntity;
     }
 
-    private void persistAccount(AccountQueryEntity accountQueryEntity) {
+    public void persistAccount(AccountQueryEntity accountQueryEntity) {
         accountRepository.save(accountQueryEntity);
     }
 }
