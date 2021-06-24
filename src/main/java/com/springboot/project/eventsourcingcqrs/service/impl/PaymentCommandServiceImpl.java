@@ -7,6 +7,7 @@ import com.springboot.project.eventsourcingcqrs.model.AccountCreateDTO;
 import com.springboot.project.eventsourcingcqrs.model.MoneyCreditDTO;
 import com.springboot.project.eventsourcingcqrs.model.MoneyDebitDTO;
 import com.springboot.project.eventsourcingcqrs.service.PaymentCommandService;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+@Slf4j
 @Service
 public class PaymentCommandServiceImpl implements PaymentCommandService {
 
